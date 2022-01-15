@@ -1,0 +1,71 @@
+version: '3.9'
+
+services:
+  api-gateway:
+    container_name: api-gateway
+    image: api-gateway
+    ports:
+      - "1051:443"
+      - "1050:80"
+    restart: always
+    build:
+      context: .
+      dockerfile: ApiGatewayOcelot.Application/Dockerfile
+    networks:
+      - api-gateway-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Pa1153w0rd
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    depends_on:
+      - customer-api
+      - catalog-api
+
+  customer-api:
+    container_name: customer-api
+    image: customer-api
+    ports:
+      - "1061:443"
+      - "1060:80"
+    restart: always
+    build:
+      context: .
+      dockerfile: CustomerApi.Application/Dockerfile
+    networks:
+      - api-gateway-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Pa1153w0rd
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  catalog-api:
+    container_name: catalog-api
+    image: catalog-api
+    ports:
+      - "1071:443"
+      - "1070:80"
+    restart: always
+    build:
+      context: .
+      dockerfile: CatalogApi.Application/Dockerfile
+    networks:
+      - api-gateway-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Pa1153w0rd
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+networks:
+  api-gateway-network:
+    external: false
+    name: api-gateway-network
+    driver: bridge

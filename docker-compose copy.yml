@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  api-gateway:
+    container_name: api-gateway
+    image: api-gateway
+    ports:
+      - "1050:443"
+      - "1051:80"
+    restart: always
+    networks:
+      - api-gateway-network
+    build:
+      context: .
+      dockerfile: ApiGatewayOcelot.Application/Dockerfile
+    environment:
+      - API_HOST=https://api
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Pa55w0rd
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_HTTPS_PORT=1050
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    depends_on:
+      - customer-api
+      - catalog-api
+
+  customer-api:
+    container_name: customer-api
+    image: customer-api
+    ports:
+      - "1060:443"
+      - "1061:80"
+    restart: always
+    networks:
+      - api-gateway-network
+    build:
+      context: .
+      dockerfile: CustomerApi.Application/Dockerfile
+    environment:
+      - API_HOST=https://api
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Pa55w0rd
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_HTTPS_PORT=1060
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  catalog-api:
+    container_name: catalog-api
+    image: catalog-api
+    ports:
+      - "1070:443"
+      - "1071:80"
+    restart: always
+    networks:
+      - api-gateway-network
+    build:
+      context: .
+      dockerfile: CatalogApi.Application/Dockerfile
+    environment:
+      - API_HOST=https://api
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Pa55w0rd
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_HTTPS_PORT=1070
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+networks:
+  api-gateway-network:
