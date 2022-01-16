@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "28ce0b5a-1f52-4f33-bb24-d9bac45335a1",
+		"name": "Api Gateway - Ocelot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Customer] Consultar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:1061/api/customer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "1061",
+					"path": [
+						"api",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Catalog] Consultar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:1071/api/Catalog",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "1071",
+					"path": [
+						"api",
+						"Catalog"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Api Gateway] [Customer] Consultar por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:1051/customer-service/customer/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "1051",
+					"path": [
+						"customer-service",
+						"customer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Api Gateway] [Customer] Consultar todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:1051/customer-service/customer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "1051",
+					"path": [
+						"customer-service",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Api Gateway] [Catalog] Consultar por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:1051/catalog-service/catalog/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "1051",
+					"path": [
+						"catalog-service",
+						"catalog",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Api Gateway] [Catalog] Consultar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:1051/catalog-service/catalog",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "1051",
+					"path": [
+						"catalog-service",
+						"catalog"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[api-gateway] [rick-and-morty] [episode] Consultar todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:1051/cartoon-service/rick-and-morty/episode",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "1051",
+					"path": [
+						"cartoon-service",
+						"rick-and-morty",
+						"episode"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
