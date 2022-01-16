@@ -3,18 +3,18 @@ using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// var myAllowSpecificOrigins = "_MyAllowSubdomainPolicy";
+var myAllowSpecificOrigins = "_MyAllowSubdomainPolicy";
 
-// builder.Services.AddCors(options =>
-// {
-//     options.AddPolicy(name: myAllowSpecificOrigins,
-//         builder =>
-//         {
-//             _ = builder.AllowAnyOrigin()
-//                    .AllowAnyHeader()
-//                    .AllowAnyMethod();
-//         });
-// });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: myAllowSpecificOrigins,
+        builder =>
+        {
+            _ = builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 
 _ = builder.Services.AddHttpsRedirection(options => options.HttpsPort = 443);
 _ = builder.Configuration.AddJsonFile("configuration.json", false, true);
@@ -35,7 +35,7 @@ _ = app.UseHttpsRedirection();
 _ = app.UseAuthorization();
 _ = app.MapControllers();
 
-// app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.UseOcelot().Wait();
 app.Run();

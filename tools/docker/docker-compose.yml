@@ -9,8 +9,8 @@ services:
       - "1050:80"
     restart: always
     build:
-      context: .
-      dockerfile: ApiGatewayOcelot.Application/Dockerfile
+      context: ../../src/
+      dockerfile: ./ApiGatewayOcelot.Application/Dockerfile
     networks:
       - api-gateway-network
     environment:
@@ -32,8 +32,8 @@ services:
       - "1060:80"
     restart: always
     build:
-      context: .
-      dockerfile: CustomerApi.Application/Dockerfile
+      context: ../../src/
+      dockerfile: ./CustomerApi.Application/Dockerfile
     networks:
       - api-gateway-network
     environment:
@@ -52,8 +52,8 @@ services:
       - "1070:80"
     restart: always
     build:
-      context: .
-      dockerfile: CatalogApi.Application/Dockerfile
+      context: ../../src/
+      dockerfile: ./CatalogApi.Application/Dockerfile
     networks:
       - api-gateway-network
     environment:
